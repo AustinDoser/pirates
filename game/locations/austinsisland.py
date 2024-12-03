@@ -49,24 +49,11 @@ class Beach_with_ship (location.SubLocation):
 class Key:
     def __init__ (self, m):
         self.name = "Cell key"
-        description = "A small rusty key on a big key ring"
-        display.announce(description)
+        
 
        
-class Jail (location.SubLocation):
-    def __init__ (self, m):
-        super().__init__(m)
-        self.name = "jail"
-        self.verbs['exit'] = self
-        self.verbs['leave'] = self
-        self.key_found = False
-        self.cell_locked = True
-        self.key = Key()
-        self.alchohlic_name = "alchohlic"
-        self.alchohlic_decription = "A very massive guy that is very shaky and doesn't speak a word"
-    def enter (self):
-        description = "You walk upon the center of the island.\nA worn-down jail that has a sign that reads STAY AWAY, DON'T GIVE THE GIANT BOOZE! /nYou can enter it."
-        display.announce(description)
+
+  
     
     def process_verb (self, verb, cmd_list, nouns):
         if verb == "search" and not self.key_found:
@@ -83,6 +70,30 @@ class Jail (location.SubLocation):
             display.announce ("You entered the cell")
         elif verb == "enter" and self.cell_locked:
             display.announce ("The cell door is locked, you must unlock it")
+class OutsideJail (location.SubLocation):
+    def __init__ (self, m):
+        self.name = "jail"
+        self.verbs['exit'] = self
+        self.verbs['leave'] = self
+    pass
+def enter (self):
+        description = "You walk upon the center of the island.\nA worn-down jail that has a sign that reads STAY AWAY, DON'T GIVE THE GIANT BOOZE! /nYou can enter it."
+        display.announce(description)
+class JainEntryAndCells (location.SubLocation):
+    def __init__ (self, m):
+        self.cell_locked = True
+        self.alchohlic_name = "alchohlic"
+        self.alchohlic_decription = "A very massive guy that is very shaky and doesn't speak a word"
+    pass
+
+class JailOffice (location.SubLocation):
+    def __init__ (self, m):
+        self.key = Key()
+        self.key_found = False
+        
+        
+    pass
+
 class Debris_pile (location.SubLocation):
     def __init__ (self, m):
         super().__init__(m)
